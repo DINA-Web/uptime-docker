@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+
+  mongo:
+    image: mongo
+
+  uptime:
+    image: usman/docker-uptime
+    environment:
+      - VIRTUAL_HOST=uptime.nrm.se
+      - VIRTUAL_PORT=8082
+      - VIRTUAL_PROTO=http
+    volumes:
+      - ./default.yaml:/tmp/uptime/config/default.yaml
+    ports:
+      - 8082:8082
+    links:
+      - mongo:mongodb
